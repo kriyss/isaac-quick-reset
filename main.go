@@ -62,7 +62,7 @@ func pressKey(vk uint16, flags int) {
 			Ki: w32.KEYBDINPUT{
 				WVk:         vk,
 				WScan:       0,
-				DwFlags:     flags,
+				DwFlags:     uint32(flags),
 				Time:        0,
 				DwExtraInfo: 0,
 			},
@@ -94,7 +94,7 @@ func findWindow(title string) (uintptr, error) {
 	if hwnd == 0 {
 		return 0, fmt.Errorf("No window with title '%s' found", title)
 	}
-	return hwnd, nil
+	return uintptr(hwnd), nil
 }
 
 func enumWindows(enumFunc uintptr, lparam uintptr) (err error) {
